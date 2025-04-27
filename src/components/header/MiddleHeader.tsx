@@ -17,7 +17,7 @@ const MiddleHeader = () => {
     <div className='border-b-[1px] border-b-gray-400'>
         <Container className='py-5 flex items-center justify-between gap-4 md:gap-6 lg:gap-20'>
             <Link href={"/"}>
-              <Image src={logo} alt="logo" className="w-28"></Image>
+              <Image src={logo} alt="logo" className="w-28" priority></Image>
             </Link>
 
             <SearchInput/>
