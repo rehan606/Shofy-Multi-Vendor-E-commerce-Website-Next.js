@@ -1,4 +1,4 @@
-"use client"
+ "use client"
 import React from 'react'
 import { ProductType } from '../../type'
 import Link from 'next/link'
@@ -9,7 +9,7 @@ const ProductCard = ({ product }: { product: ProductType}) => {
 
     
     return (
-        <div className="border border-gray-400 hover:shadow-lg hover:shadow-black/30 duration-200 rounded-md  p-4 relative group "> 
+        <div className="border border-gray-400 hover:shadow-lg hover:shadow-black/30 duration-200 rounded-md  p-4 relative group overflow-hidden "> 
 
             <Link href={'/products'}>
                 <Image 
@@ -25,8 +25,15 @@ const ProductCard = ({ product }: { product: ProductType}) => {
             </Link>
 
             <Sidebar/>
+
+            <div className="border-t border-t-gray-200 py-2 mt-4 px-4 flex flex-col justify-between h-40">
+                <div>
+                    <p className="text-sm font-medium text-gray-500 capitalize">{product?.category}</p>
+                    <h2 className="font-semibold text-base line-clamp-2">{product.title}</h2>
+                </div>
+
+            </div>
         
-            {product.title} 
         
         </div>
     )
