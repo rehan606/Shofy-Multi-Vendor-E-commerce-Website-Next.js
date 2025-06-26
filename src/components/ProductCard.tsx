@@ -4,9 +4,12 @@ import { ProductType } from '../../type'
 import Link from 'next/link'
 import Image from 'next/image'
 import Sidebar from '@/components/Sidebar'
+import ProductPrice from './ProductPrice'
 
 const ProductCard = ({ product }: { product: ProductType}) => {
 
+    const regularPrice = product?.price;
+    const discountPrice = product?.price + product?.discountPercenta;
     
     return (
         <div className="border border-gray-400 hover:shadow-lg hover:shadow-black/30 duration-200 rounded-md  p-4 relative group overflow-hidden "> 
@@ -31,6 +34,9 @@ const ProductCard = ({ product }: { product: ProductType}) => {
                     <p className="text-sm font-medium text-gray-500 capitalize">{product?.category}</p>
                     <h2 className="font-semibold text-base line-clamp-2">{product.title}</h2>
                 </div>
+
+                <ProductPrice product={product}/>
+                
 
             </div>
         
