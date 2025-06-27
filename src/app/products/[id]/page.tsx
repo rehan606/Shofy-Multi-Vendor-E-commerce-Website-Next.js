@@ -5,6 +5,8 @@ import React from 'react'
 import { ProductType } from '../../../../type';
 import ProductPrice from '@/components/ProductPrice';
 import { MdStar } from 'react-icons/md';
+import { FaRegEye } from 'react-icons/fa';
+import PriceFormat from '@/components/PriceFormat';
 
 interface Props {
   params: {
@@ -25,11 +27,11 @@ const SingleProductPage = async ({ params }: Props) => {
       {/* Product Image  */}
       <ProductImages images={product?.images}/>
       {/* Product Details  */}
-      <div className='flex felx-col gap-4'>
+      <div className='flex flex-col gap-4'>
           <h3 className='text-3xl font-bold '>{product?.title}</h3>
           <div className='flex items-center  justify-between gap-5'>
               <ProductPrice product={product}/>
-              
+
               <div className='flex items-center gap-1'>
                   <div className='flex items-center text-base text-gray-400'>
                       {Array?.from({length:5})?.map((_,index) => {
@@ -41,7 +43,11 @@ const SingleProductPage = async ({ params }: Props) => {
                   <p className='text-base font-semibold'>{`(${product?.rating?.toFixed(1)}) Reviews`} </p>
               </div>
           </div>
-          <p>{}</p>
+          <p className="flex items-center">
+            <FaRegEye className='mr-1' /> {" "} <span className="font-semibold mr-1"> 250+ </span>people are viewing this right now
+          </p>
+
+          <p>You are saving <PriceFormat amount={product?.discountPercentage / 100 } className="text-base font-semibold text-green-500"/> Upon purchase </p>
       </div>
       {/* Product Review  */}
     </Container>
