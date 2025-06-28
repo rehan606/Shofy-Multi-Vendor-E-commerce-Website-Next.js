@@ -64,15 +64,30 @@ const SingleProductPage = async ({ params }: Props) => {
           ))}
           </p>
 
-          <AddToCartButton product={product} />
+          <AddToCartButton product={product} className="rounded-md uppercase font-semibold" />
 
-          <div className='bg-gray-200 w-full'>
-           
-            <Image src={ payment } alt="Payment"/>
-            <p>Guaranteed safe & secure checkout</p>
+          <div className='bg-gray-100 w-full flex flex-col items-center justify-center p-5 gap-2'>
+
+            <Image src={ payment } alt="Payment" className='w-auto object-cover' />
+
+            <p className='font-semibold text-gray-500  mt-2'>Guaranteed safe & secure checkout</p>
           </div>
       </div>
       {/* Product Review  */}
+
+        <div className='p-10 bg-[#f7f7f7] md:col-span-2 flex items-center gap-10'>
+          {
+            product?.reviews?.map((item) => (
+              <div key={item?.reviewerName} className='bg-white/80 p-5 border-[1px] border-gray-300 rounded-md hover:border-gray-500  hover:bg-white duration-200 flex flex-col gap-1'>
+                  <p className="text-base font-semibold ">{item?.comment}</p>
+                  <div className="text-xs">
+                    <p className=" font-semibold ">{item?.reviewerName} </p>
+                    <p className=" ">{item?.reviewerEmail} </p>
+                  </div>
+              </div>
+            ))
+          }
+        </div>
     </Container>
   )
 }
