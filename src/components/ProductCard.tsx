@@ -40,7 +40,7 @@ const ProductCard = ({ product }: { product: ProductType}) => {
                     <ProductPrice product={product}/>
                 </div>
 
-                <AddToCartButton/>
+                <AddToCartButton product={product}/>
 
             </div>
         

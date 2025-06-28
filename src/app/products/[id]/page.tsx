@@ -7,6 +7,9 @@ import ProductPrice from '@/components/ProductPrice';
 import { MdStar } from 'react-icons/md';
 import { FaRegEye } from 'react-icons/fa';
 import PriceFormat from '@/components/PriceFormat';
+import AddToCartButton from '@/components/AddToCartButton';
+import payment from '@/assets/payment.webp'
+import Image from 'next/image';
 
 interface Props {
   params: {
@@ -58,7 +61,16 @@ const SingleProductPage = async ({ params }: Props) => {
           <p >Category: {""} <span className='font-medium capitalize'>{product?.category}</span> </p>
           <p>Tags: {product?.tags?.map((item, index) => (
             <span className='font-medium capitalize' key={index}>{item} {index < product?.tags?.length - 1 && ", "}</span>
-          ))}</p>
+          ))}
+          </p>
+
+          <AddToCartButton product={product} />
+
+          <div className='bg-gray-200 w-full'>
+           
+            <Image src={ payment } alt="Payment"/>
+            <p>Guaranteed safe & secure checkout</p>
+          </div>
       </div>
       {/* Product Review  */}
     </Container>
