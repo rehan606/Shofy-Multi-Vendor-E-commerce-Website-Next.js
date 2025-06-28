@@ -66,7 +66,7 @@ const SingleProductPage = async ({ params }: Props) => {
 
           <AddToCartButton product={product} className="rounded-md uppercase font-semibold" />
 
-          <div className='bg-gray-100 w-full flex flex-col items-center justify-center p-5 gap-2'>
+          <div className='bg-gray-100 w-full flex flex-col items-center justify-center p-5 gap-2 rounded-md'>
 
             <Image src={ payment } alt="Payment" className='w-auto object-cover' />
 
@@ -75,7 +75,7 @@ const SingleProductPage = async ({ params }: Props) => {
       </div>
       {/* Product Review  */}
 
-        <div className='p-10 bg-[#f7f7f7] md:col-span-2 flex items-center gap-10'>
+        <div className='p-10 bg-[#F7F7F7] md:col-span-2 flex items-center gap-10'>
           {
             product?.reviews?.map((item) => (
               <div key={item?.reviewerName} className='bg-white/80 p-5 border-[1px] border-gray-300 rounded-md hover:border-gray-500  hover:bg-white duration-200 flex flex-col gap-1'>
@@ -88,12 +88,13 @@ const SingleProductPage = async ({ params }: Props) => {
                   {/* Review Star  */}
                   <div className='flex items-center'>
                     <div className='flex items-center'>
-                      {Array?.from({ length: 5})?.map((_, index) => (
+                      {Array?.from({ length: 5 })?.map((_, index) => (
                         <MdStar 
                           key={index} 
                           className={`${
-                            index < item?.rating ? "text-yellow-500" : "text-gray-50"
-                        }`}/>
+                            index < item?.rating ? "text-yellow-500" : "text-gray-300"
+                        }`}
+                        />
                       ))}
                     </div>
                   </div>
