@@ -48,6 +48,17 @@ const SingleProductPage = async ({ params }: Props) => {
           </p>
 
           <p>You are saving <PriceFormat amount={product?.discountPercentage / 100 } className="text-base font-semibold text-green-500"/> Upon purchase </p>
+
+          <div>
+            <p className='text-sm tracking-wide'>{product?.description}</p>
+            <p className='text-base'>{product?.warrantyInformation}</p>
+          </div>
+
+          <p >Brand: <span className='font-medium'>{product?.brand}</span> </p>
+          <p >Category: {""} <span className='font-medium capitalize'>{product?.category}</span> </p>
+          <p>Tags: {product?.tags?.map((item, index) => (
+            <span className='font-medium capitalize' key={index}>{item} {index < product?.tags?.length - 1 && ", "}</span>
+          ))}</p>
       </div>
       {/* Product Review  */}
     </Container>
