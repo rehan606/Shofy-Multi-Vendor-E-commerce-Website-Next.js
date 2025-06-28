@@ -84,6 +84,19 @@ const SingleProductPage = async ({ params }: Props) => {
                     <p className=" font-semibold ">{item?.reviewerName} </p>
                     <p className=" ">{item?.reviewerEmail} </p>
                   </div>
+
+                  {/* Review Star  */}
+                  <div className='flex items-center'>
+                    <div className='flex items-center'>
+                      {Array?.from({ length: 5})?.map((_, index) => (
+                        <MdStar 
+                          key={index} 
+                          className={`${
+                            index < item?.rating ? "text-yellow-500" : "text-gray-50"
+                        }`}/>
+                      ))}
+                    </div>
+                  </div>
               </div>
             ))
           }
