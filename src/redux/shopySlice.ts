@@ -1,6 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { ProductType } from "../../type";
 
-const initialState = {
+interface InitialState {
+    cart: ProductType[];
+    favorite: ProductType[];
+    userInfo: any;
+}
+
+const initialState: InitialState = {
     cart: [],
     favorite: [],
     userInfo: null,
@@ -12,7 +19,13 @@ export const shopySlice = createSlice({
     initialState,
     reducers:{
         addToCart:( state, action) => {
-            state.cart = action.payload
+            const existingProduct = state?.cart?.find((item) => item?.id === action.payload?.id );
+            if(existingProduct) {
+                existingProduct.quantity! += 1;
+            } else {
+                state.cart.push({ ...action.payload, quantity: 1});
+            }
+            // state.cart.push(action.payload);
         }
     }
 });
