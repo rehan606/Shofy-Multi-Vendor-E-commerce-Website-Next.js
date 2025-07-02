@@ -14,11 +14,11 @@ const HeaderIcon = () => {
     <>
       <Link href={"/favorite"} className='text-2xl relative'>
         <MdFavoriteBorder/>
-        <span className='absolute -top-1 -right-1 text-[12px] font-medium w-4 h-4 bg-[#2269bb] rounded-full text-white flex items-center justify-center' > {favorite?.length > 0} </span>
+        <span className='absolute -top-1 -right-1 text-[12px] font-medium w-4 h-4 bg-[#2269bb] rounded-full text-white flex items-center justify-center' > {favorite?.length > 0 ? favorite?.length: '0'} </span>
       </Link>
       <Link href={"/cart"} className='text-2xl relative'>
         <BiShoppingBag/>
-        <span className='absolute -top-1 -right-1 text-[12px] font-medium w-4 h-4 bg-[#2269bb] rounded-full text-white flex items-center justify-center' >0</span>
+        <span className='absolute -top-1 -right-1 text-[12px] font-medium w-4 h-4 bg-[#2269bb] rounded-full text-white flex items-center justify-center' >{cart?.length > 0 ? cart?.length : '0'}</span>
       </Link>
     </>
   )
