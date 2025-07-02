@@ -4,6 +4,7 @@ import { twMerge } from 'tailwind-merge'
 import { ProductType } from '../../type'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '@/redux/shopySlice'
+import toast from 'react-hot-toast'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const AddToCartButton = ({ product, className }: {product: ProductType; className?: string;}) => {
@@ -11,7 +12,8 @@ const AddToCartButton = ({ product, className }: {product: ProductType; classNam
   const dispatch = useDispatch();
   const handleAddToCart = () =>{
     if (product) {
-      dispatch(addToCart(product))
+      dispatch(addToCart(product));
+      toast.success(`${product?.title.substring(0,10)}... added successfully! `)
     }
   }
   return (
