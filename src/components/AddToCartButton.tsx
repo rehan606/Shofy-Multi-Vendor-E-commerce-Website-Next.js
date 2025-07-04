@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { ProductType, StateType } from '../../type'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToCart } from '@/redux/shopySlice'
+import { addToCart, decreaseQuantity, increaseQuantity } from '@/redux/shopySlice'
 import toast from 'react-hot-toast'
 import { FaMinus, FaPlus } from 'react-icons/fa'
 
@@ -29,15 +29,27 @@ const AddToCartButton = ({ product, className }: {product: ProductType; classNam
   }
   return <>
     { existingProduct? <div className='flex self-start items-center justify-center gap-2 py-2 mb-2'>
-      <button className='bg-[#f7f7f7] text-black p-2 border-[1px] border-gray-200 hover:border-sky-400 rounded-full text-sm hover:bg-white duration-200 cursor-pointer disabled:text-gray-300 disabled:hover:bg-[#f7f7f7]'> <FaMinus/> </button> 
+      <button 
+        onClick={() => {
+          dispatch(decreaseQuantity(product?.id))
+            toast.success("Quantity Decremen successfully!");
+      }} 
+        // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+      disabled={existingProduct?.quantity! <= 1}
+      className='bg-[#f7f7f7] text-black p-2 border-[1px] border-gray-200 hover:border-sky-400 rounded-full text-sm hover:bg-white duration-200 cursor-pointer disabled:text-gray-300 disabled:hover:bg-[#f7f7f7]' > <FaMinus/> </button> 
+
       <p className='text-base font-semibold w-10 text-center'>{existingProduct?.quantity}</p>
-      <button className='bg-[#f7f7f7] text-black p-2 border-[1px] border-gray-200 hover:border-sky-400 rounded-full text-sm hover:bg-white duration-200 cursor-pointer disabled:text-gray-300 disabled:hover:bg-[#f7f7f7]'> <FaPlus/> </button>
+
+      <button onClick={() => {
+        dispatch(increaseQuantity(product?.id))
+          toast.success("Quantity Increment successfully!");
+      }} className='bg-[#f7f7f7] text-black p-2 border-[1px] border-gray-200 hover:border-sky-400 rounded-full text-sm hover:bg-white duration-200 cursor-pointer disabled:text-gray-300 disabled:hover:bg-[#f7f7f7]'> <FaPlus/> </button>
     </div> : <button 
       onClick={handleAddToCart} 
       className={twMerge('bg-tranparent border border-sky-500 text-black rounded-full py-1.5 hover:bg-sky-500 hover:text-white duration-300 my-2', className
 
       )}
-      >Add To Cart
+      > Add To Cart
     </button> }
     
     
