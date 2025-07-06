@@ -2,12 +2,13 @@ import CartProducts from '@/components/cartPage/CartProducts'
 import Container from '@/components/Container'
 import React from 'react'
 
-const page = () => {
-    return (
+const CartPage = () => {
+    return <>
         <Container className='py-10'>
+            
             <CartProducts/>
-        </Container>
-    )
+        </Container>;
+    </>
 }
 
-export default page
+export default CartPage;
