@@ -1,8 +1,9 @@
 'use client'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { StateType } from '../../../type'
-import Link from 'next/link'
+import { ProductType, StateType } from '../../../type'
+import Link from 'next/link' 
+import CartProduct from './CartProduct'
 
 const CartProducts = () => {
 
@@ -10,7 +11,19 @@ const CartProducts = () => {
     return (
         <div>
             {cart?.length > 0 ? 
-                <div><p>Product</p></div> 
+                <>
+                    <h1 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'> Shopping Cart </h1>
+
+                    <div className='mt-10 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-1 2'>
+                        <section className='lg:col-span-7'>
+                            <div className='divide-y divide-gray-200 border-b border-t border-gray-200'>
+                                {cart?.map((product:ProductType) => (
+                                    <CartProduct key={product?.id} product={product} />
+                                ))}
+                            </div>
+                        </section>
+                    </div>
+                </> 
                 : 
                 <div className='bg-white h-96 my-10 flex flex-col gap-4 items-center justify-center py-5 rounded-lg border border-gray-200 drop-shadow-2xl'>
                     <h1 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'> Shopping Cart </h1>
