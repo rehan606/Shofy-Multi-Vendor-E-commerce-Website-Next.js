@@ -41,8 +41,29 @@ export const shopySlice = createSlice({
                 existingProduct.quantity! -= 1;
             }
         },
+
+        // Remove from Cart 
+        removeFromCart: (state, action) => {
+            state.cart = state.cart.filter((item) => item?.id !== action.payload);
+        },
+
+        // Reset Cart 
+        resetCart: (state) => {
+            state.cart = [];
+        },
+
+        // Add to Favorite 
+        addToFavorite: (state, action) => {
+            const existingProduct = state?.favorite?.find((item) => item?.id === action.payload?.id);
+            
+            if (existingProduct) {
+                state.favorite = state.favorite.filter((item) => item?.id !== action.payload.id);
+            } else {
+                state.favorite.push(action.payload);
+            }
+        }
     }
 });
 
-export const { addToCart, increaseQuantity, decreaseQuantity } = shopySlice.actions;
+export const { addToCart, increaseQuantity, decreaseQuantity, removeFromCart, resetCart, addToFavorite } = shopySlice.actions;
 export default shopySlice.reducer;

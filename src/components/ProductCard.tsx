@@ -31,7 +31,7 @@ const ProductCard = ({ product }: { product: ProductType}) => {
             
             </Link>
 
-            <Sidebar/>
+            <Sidebar product={product}/>
 
             <div className="border-t border-t-gray-200 py-2 mt-4 px-4 flex flex-col justify-between h-40">
                 <div>
