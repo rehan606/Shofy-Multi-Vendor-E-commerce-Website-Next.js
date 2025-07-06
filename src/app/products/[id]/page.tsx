@@ -50,7 +50,7 @@ const SingleProductPage = async ({ params }: Props) => {
             <FaRegEye className='mr-1' /> {" "} <span className="font-semibold mr-1"> 250+ </span>people are viewing this right now
           </p>
 
-          <p>You are saving <PriceFormat amount={product?.discountPercentage / 100 } className="text-base font-semibold text-green-500"/> Upon purchase </p>
+          <p>You are saving {" "} <PriceFormat amount={(product?.price * product?.discountPercentage) / 100 } className="text-base font-semibold text-green-500"/> Upon purchase </p>
 
           <div>
             <p className='text-sm tracking-wide'>{product?.description}</p>
