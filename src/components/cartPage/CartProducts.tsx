@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { ProductType, StateType } from '../../../type'
 import Link from 'next/link' 
 import CartProduct from './CartProduct'
+import CartSummary from './CartSummary'
 
 const CartProducts = () => {
 
@@ -22,6 +23,8 @@ const CartProducts = () => {
                                 ))}
                             </div>
                         </section>
+                        {/* Cart Summary  */}
+                        <CartSummary/>
                     </div>
                 </> 
                 : 
