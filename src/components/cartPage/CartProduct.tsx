@@ -10,7 +10,8 @@ import { removeFromCart } from '@/redux/shopySlice'
 import toast from 'react-hot-toast'
 import { FaCheck } from 'react-icons/fa'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+
 const CartProduct = ({ product }: {product: ProductType}) => {
 
     const dispatch = useDispatch()

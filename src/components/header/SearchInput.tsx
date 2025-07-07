@@ -1,11 +1,37 @@
 "use client";
 
-import React, { useState } from 'react'
+import { getData } from '@/helpers';
+import React, { useEffect, useState } from 'react'
 import { RiCloseLine, RiSearchLine } from 'react-icons/ri';
+import { ProductType } from '../../../type';
 
 const SearchInput = () => {
 
     const [search, setSearch] = useState("");
+    const [products, setProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
+
+    useEffect(() => {
+        const getProducts = async () => {
+            const endpoint = 'https://dummyjson.com/products';
+
+            try {
+                const data = await getData(endpoint);
+                setProducts(data?.products)
+            } catch (error) {
+                console.log("Error fetching data", error);
+            }
+        }
+        getProducts();
+    },[]);
+
+    // search filter data 
+    useEffect (() => {
+        const filtered = products?.filter((item:ProductType)=>
+            item?.title.toLowerCase().includes(search.toLowerCase())
+        );
+        setFilteredProducts(filtered);
+    },[search , products]);
 
     return (
         <div className='hidden md:inline-flex flex-1 h-10 relative'>
