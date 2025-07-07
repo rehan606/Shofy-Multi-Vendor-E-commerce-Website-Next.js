@@ -1,7 +1,7 @@
 "use client";
 
 import { getData } from '@/helpers';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { RiCloseLine, RiSearchLine } from 'react-icons/ri';
 import { ProductType } from '../../../type';
 import Link from 'next/link';
@@ -12,6 +12,9 @@ const SearchInput = () => {
     const [search, setSearch] = useState("");
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
+    // Search Box Focused and UnFocused
+    const [isInputFocused, setIsInputFocused] = useState(false);
+    const searchContainerRef = useRef(null)
 
     useEffect(() => {
         const getProducts = async () => {
@@ -35,18 +38,36 @@ const SearchInput = () => {
         setFilteredProducts(filtered);
     },[search , products]);
 
+    // Search Box Focused and UnFocused 
+    useEffect(() => {
+        const handleClickOutside = (e:MouseEvent) => {
+            if(searchContainerRef && 
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                !searchContainerRef.current.contains(e.target)) {
+                    setIsInputFocused(false);
+                }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        };
+    },[]);
+
     return (
-        <div className='hidden md:inline-flex flex-1 h-10 relative'>
+        <div ref={searchContainerRef} className='hidden md:inline-flex flex-1 h-10 relative'>
             <input type="text" className='w-full h-full px-4 border-2 border-[#0C55AA] outline-none ' placeholder='Search Products Here...' 
             value={search} 
-            onChange={(e) => setSearch(e.target.value)} />
+            onChange={(e) => setSearch(e.target.value)}
+            onFocus={()=> setIsInputFocused(true)} />
 
             {search && ( <RiCloseLine onClick={() => setSearch('')} className='text-xl absolute top-2.5 right-12 text-gray-500 hover:text-red-500 cursor-pointer duration-200'/>)}
 
             <span className=' w-10 h-10 bg-[#2269bb] inline-flex items-center justify-center text-white cursor-pointer absolute top-0 right-0 hover:bg-[#5a7ca3]'> <RiSearchLine/> </span>
 
             {/* Search Product  */}
-            {search && (
+            { isInputFocused && search && (
                 <div className='absolute left-0 top-12 w-full mx-auto h-auto max-h-96 bg-white rounded-md overflow-y-scroll cursor-pointer text-black p-4'>
                     {filteredProducts?.length > 0 ? 
                         (<div>
