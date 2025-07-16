@@ -5,7 +5,8 @@ import { LiaUser } from 'react-icons/lia'
 
 const SigningButton = () => {
     return (
-        <div onClick={() => signIn() } className='flex items-center gap-2 cursor-pointer text-sm'>
+        <div onClick={() => signIn() } 
+        className='flex items-center gap-2 cursor-pointer text-sm'>
             <div className='border-2 border-gray-700 p-1.5 rounded-full text-xl'>
                 <LiaUser/>
             </div>
