@@ -7,11 +7,14 @@ import MainLoader from './MainLoader'
 
 const Layout = ({ children }: {children: React.ReactNode }) => {
     return (
-        <Provider store={store}>
-            <PersistGate loading={<MainLoader/>} persistor={persistor}>
-                { children }
-            </PersistGate>
-        </Provider>
+        <SessionProvider>
+            <Provider store={store}>
+                <PersistGate loading={<MainLoader/>} persistor={persistor}>
+                    { children }
+                </PersistGate>
+            </Provider>
+        </SessionProvider>
+        
     )
 }
 
