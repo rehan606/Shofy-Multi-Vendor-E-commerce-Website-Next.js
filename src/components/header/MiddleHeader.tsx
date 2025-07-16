@@ -7,7 +7,7 @@ import SearchInput from './SearchInput';
 import Link from 'next/link';
 import HeaderIcon from './HeaderIcon';
 import MobileNavigation from './MobileNavigation';
-import SigningButton from '../SigningButton';
+import SignInButton from '../SignInButton';
 
 
 
@@ -23,7 +23,7 @@ const MiddleHeader = () => {
             <SearchInput/>
 
             <div className='hidden md:inline-flex items-center gap-3'>
-              <SigningButton/>
+              <SignInButton/>
               <HeaderIcon/>
             </div>
 
