@@ -4,6 +4,8 @@ import Image from 'next/image'
 import React from 'react'
 import { LiaUser } from 'react-icons/lia'
 
+
+
 const SignInButton = () => {
     const { data: session } = useSession()
 
@@ -14,7 +16,7 @@ const SignInButton = () => {
                     onClick={() => signOut() } 
                     className='flex items-center gap-2 cursor-pointer text-sm'>
                     <div className='border-2 border-gray-700  rounded-full w-10 h-10'>
-                        <Image src={session?.user?.image} alt='profie_image' width={200} height={200} className='w-full h-full rounded-full object-cover'/>
+                        <Image src={session?.user?.image ?? '/default.png'} alt='profie_image' width={200} height={200} className='w-full h-full rounded-full object-cover'/>
                     </div>
                     <div>
                         <p className='text-xs'>Hello, {session?.user?.name}</p>
