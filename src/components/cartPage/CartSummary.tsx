@@ -1,10 +1,11 @@
+// /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import React, { useEffect, useState } from 'react'
 import Title from '../Title'
 import PriceFormat from '../PriceFormat'
 import { ProductType } from '../../../type'
 import Button from '../header/Button';
-import toast from 'react-hot-toast';
+import { useSession } from 'next-auth/react';
 
 interface Props {
     cart: ProductType[];
@@ -14,6 +15,7 @@ interface Props {
 const CartSummary = ({ cart }: Props) => {
     const [totalAmt, setTotalAmt] = useState(0);
     const [discountAmt, setDiscountAmt] = useState(0);
+    const { data:session } = useSession();
 
     useEffect(() => {
         let amt = 0;
@@ -27,9 +29,22 @@ const CartSummary = ({ cart }: Props) => {
         setDiscountAmt(discount)
     },[cart]);
 
-    const handleCheckout = () => {
-        toast.success('Chackout is comming soon!');
-    }
+    const handleCheckout = async() => {
+   
+        const response = await fetch('api/checkout', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                items: cart,
+                email: session?.user?.email,
+            }),
+        });
+
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const checkoutSession = await response?.json();
+    };
 
     return (
         <div className='bg-gray-50 rounded-lg px-4 py-4 sm:p-10 lg:col-span-5 mt-10 lg:mt-0'>

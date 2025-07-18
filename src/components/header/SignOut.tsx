@@ -6,7 +6,7 @@ import React from 'react'
 const SignOut = () => {
     return (
         <div>
-            <button onClick={()=>signOut()}> Logout </button>
+            <button className="cursor-pointer" onClick={()=>signOut()}> Logout </button>
             
         </div>
     )
