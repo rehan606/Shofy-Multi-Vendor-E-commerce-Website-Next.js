@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 import { configureStore } from '@reduxjs/toolkit'
 import shopyReducer from './shopySlice'
 import { persistStore, persistReducer, WebStorage } from 'redux-persist'
@@ -39,6 +40,6 @@ export const store = configureStore({
   },
 });
 
-// eslint-disable-next-line prefer-const
+
 export let persistor = persistStore(store);
 
