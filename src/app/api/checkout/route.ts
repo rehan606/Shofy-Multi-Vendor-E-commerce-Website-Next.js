@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+// /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { NextRequest, NextResponse } from "next/server";
 import { ProductType } from "../../../../type";
@@ -17,7 +17,7 @@ export const POST = async(request: NextRequest) =>{
             quantity: item?.quantity,
             price_data:{
                 currency: 'usd',
-                unit_amount: Math.round(item?.price * 100), 
+                unit_amount: Math.round((item?.price * 100 * (1 - item?.discountPercentage / 100 ))), 
                 product_data: {
                     name: item?.title,
                     description: item?.description,

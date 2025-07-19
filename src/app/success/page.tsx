@@ -1,8 +1,29 @@
-
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+"use client";
+import { resetCart } from '@/redux/shopySlice';
 import Link from 'next/link';
+import { redirect, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 import { BiCheckCircle } from 'react-icons/bi';
+import { useDispatch } from 'react-redux';
 
 export default function PaymentSuccess() {
+
+  const searchParams = useSearchParams()
+  const sessionId = searchParams.get("session_id");
+  const dispatch = useDispatch()
+
+  !sessionId && redirect("/");
+
+  useEffect(()=>{
+    if(sessionId){
+      dispatch(resetCart());
+      toast.success("Payment received successfully!")
+    }
+  }, [sessionId, dispatch]);
+
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 px-4 ">
       <div className="bg-white shadow-2xl rounded-2xl max-w-md w-full p-6 text-center animate-fade-in">
@@ -25,13 +46,13 @@ export default function PaymentSuccess() {
 
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Link
-            href="/"
+            href={"/"}
             className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition duration-300"
           >
             Go to Home
           </Link>
           <Link
-            href="/orders"
+            href={"/orders"}
             className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-lg transition duration-300"
           >
             View Orders

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import React, { useEffect, useState } from 'react'
@@ -6,6 +7,7 @@ import PriceFormat from '../PriceFormat'
 import { ProductType } from '../../../type'
 import Button from '../header/Button';
 import { useSession } from 'next-auth/react';
+import { loadStripe } from '@stripe/stripe-js';
 
 interface Props {
     cart: ProductType[];
@@ -29,9 +31,13 @@ const CartSummary = ({ cart }: Props) => {
         setDiscountAmt(discount)
     },[cart]);
 
+    const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+
     const handleCheckout = async() => {
-   
-        const response = await fetch('api/checkout', {
+        
+        const stripe = await stripePromise;
+
+        const response = await fetch('/api/checkout', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -42,8 +48,13 @@ const CartSummary = ({ cart }: Props) => {
             }),
         });
 
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const checkoutSession = await response?.json();
+        const result:any = await stripe?.redirectToCheckout({
+            sessionId: checkoutSession?.id,
+        });
+        if(result?.error){
+            window.alert(result?.error?.message);
+        }
     };
 
     return (
